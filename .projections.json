@@ -2,6 +2,7 @@
     "app/Models/*.php": { "type": "model" },
     "app/Http/Controllers/*.php": { "type": "http" },
     "app/Providers/*.php": { "type": "provider" },
+    "database/migrations/*.php": { "type": "migration" },
     "resources/views/*.blade.php": { "type": "blade" },
     "routes/web.php": { "type": "route" },
     "routes/api.php": { "type": "api" },

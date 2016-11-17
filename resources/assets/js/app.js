@@ -14,6 +14,9 @@ require('./bootstrap');
  */
 
 Vue.component('example', require('./components/Example.vue'));
+Vue.component('card-lists', require('./components/CardList.vue'));
+Vue.component('card-list', require('./components/List.vue'));
+Vue.component('card', require('./components/Card.vue'));
 
 const app = new Vue({
     el: '#app'

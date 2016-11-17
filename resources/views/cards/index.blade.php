@@ -1,3 +1,4 @@
-@section('layouts.app')
-    @each('list.show', $lists, 'list')
-@endsection
+<div style="clear:both">
+    <h1>Vue</h1>
+    <card-lists></card-lists>
+</div>

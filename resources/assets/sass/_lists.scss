@@ -1,0 +1,24 @@
+.lists {
+    .list {
+        background: #eee;
+        min-height: 400px;
+        margin-right: 1%;
+        width: 32%;
+        float: left;
+        padding: 10px;
+    }
+
+    .list--name {
+        font-weight: bold;
+        font-size: 1.1em;
+    }
+
+    .list-highlight {
+        @extend .list;
+
+        background: white;
+        border: 4px;
+        border: 1px solid #ccc;
+    }
+}
+
