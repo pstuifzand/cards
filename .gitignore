@@ -6,3 +6,8 @@
 Homestead.json
 Homestead.yaml
 .env
+*.map
+/public/js/all.js
+/public/css/all.css
+.padawan
+deoplete-laravel.cache
