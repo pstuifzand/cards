@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Http\Request;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,9 +22,5 @@ Auth::routes();
 Route::get('/home', 'HomeController@index');
 
 Route::post('/deploy/cards', function(Request $request) {
-    \Log::info($request->all());
-    system("git pull");
-    system("composer install");
-    system("php artisan migrate");
     return 'OK';
 });
