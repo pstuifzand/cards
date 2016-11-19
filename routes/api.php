@@ -20,14 +20,14 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:api');
 
 Route::get('/lists', function (Request $request) {
-    $lists = \Auth::user()->lists()->with(['cards' => function($query) {
+    $lists = \Auth::user()->boards()->first()->lists()->with(['cards' => function($query) {
         $query->orderBy('position', 'asc');
     }])->get();
     return response()->json($lists);
 })->middleware('auth:api');
 
 Route::post('/lists', function (Request $request) {
-    \Auth::user()->lists()->create($request->only(['name']));
+    \Auth::user()->boards()->first()->lists()->create($request->only(['name']));
     return redirect('/api/lists');
 })->middleware('auth:api');
 

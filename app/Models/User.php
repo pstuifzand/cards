@@ -32,4 +32,9 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(CardList::class, 'user_list', 'user_id', 'card_list_id');
     }
+
+    public function boards()
+    {
+        return $this->hasMany(Board::class);
+    }
 }
