@@ -15,6 +15,12 @@
     </div>
 </template>
 
+<style>
+.list {
+    margin-bottom: 20px;
+}
+</style>
+
 <script>
     export default {
         props: ['list'],

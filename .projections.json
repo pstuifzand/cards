@@ -4,6 +4,7 @@
     "app/Providers/*.php": { "type": "provider" },
     "database/migrations/*.php": { "type": "migration" },
     "resources/views/*.blade.php": { "type": "blade" },
+    "resources/assets/js/components/*.vue": { "type": "vue" },
     "routes/web.php": { "type": "route" },
     "routes/api.php": { "type": "api" },
     "routes/cli.php": { "type": "cli" }

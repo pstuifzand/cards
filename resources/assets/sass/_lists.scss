@@ -1,10 +1,13 @@
 .lists {
+    width: 98vw;
+    overflow-y: scroll;
+    white-space: nowrap;
+
     .list {
+        display: inline-block;
+        width: 240px;
         background: #eee;
-        min-height: 400px;
-        margin-right: 1%;
-        width: 32%;
-        float: left;
+        margin-right: 20px;
         padding: 10px;
     }
 

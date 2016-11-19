@@ -20,18 +20,23 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:api');
 
 Route::get('/lists', function (Request $request) {
-    $lists = CardList::with(['cards' => function($query) {
+    $lists = \Auth::user()->lists()->with(['cards' => function($query) {
         $query->orderBy('position', 'asc');
     }])->get();
     return response()->json($lists);
-});
+})->middleware('auth:api');
+
+Route::post('/lists', function (Request $request) {
+    \Auth::user()->lists()->create($request->only(['name']));
+    return redirect('/api/lists');
+})->middleware('auth:api');
 
 Route::post('/lists/{id}/cards', function (Request $request, $id) {
     CardList::findOrFail($id)
         ->cards()->create($request->only(['name']));
     $lists = CardList::with('cards')->get();
     return response()->json(['ok' => true]);
-});
+})->middleware('auth:api');
 
 Route::post('/lists/{id}/cards/{cardId}/move', function (Request $request, $id, $cardId) {
     $list = CardList::findOrFail($id);
@@ -46,4 +51,4 @@ Route::post('/lists/{id}/cards/{cardId}/move', function (Request $request, $id, 
     $card->list_id = $request->input('new_list_id');
     $card->save();
     return response()->json(['ok' => true]);
-});
+})->middleware('auth:api');

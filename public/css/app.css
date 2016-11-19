@@ -5766,22 +5766,23 @@ button.close {
   .hidden-print {
     display: none !important; } }
 
-.lists .list, .lists .list-highlight {
-  background: #eee;
-  min-height: 400px;
-  margin-right: 1%;
-  width: 32%;
-  float: left;
-  padding: 10px; }
-
-.lists .list--name {
-  font-weight: bold;
-  font-size: 1.1em; }
-
-.lists .list-highlight {
-  background: white;
-  border: 4px;
-  border: 1px solid #ccc; }
+.lists {
+  width: 98vw;
+  overflow-y: scroll;
+  white-space: nowrap; }
+  .lists .list, .lists .list-highlight {
+    display: inline-block;
+    width: 240px;
+    background: #eee;
+    margin-right: 20px;
+    padding: 10px; }
+  .lists .list--name {
+    font-weight: bold;
+    font-size: 1.1em; }
+  .lists .list-highlight {
+    background: white;
+    border: 4px;
+    border: 1px solid #ccc; }
 
 .card, .list--cards .ui-state-highlight {
   margin: 0 0 10px 0;
