@@ -25,6 +25,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home', [ 'lists' => CardList::all() ]);
+        $user = \Auth::user();
+        return view('home', [ 'lists' => $user->lists ]);
     }
 }
