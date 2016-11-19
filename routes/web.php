@@ -21,6 +21,9 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
+Route::get('/settings', function(Request $request) {
+    return view('settings');
+});
 
 Route::post('/deploy/cards', function(Request $request) {
     dispatch(new DeployNewCode());

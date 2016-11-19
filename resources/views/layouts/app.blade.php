@@ -1,29 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+        <!-- CSRF Token -->
+        <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+        <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <!-- Styles -->
-    <link href="/css/app.css" rel="stylesheet">
+        <!-- Styles -->
+        <link href="/css/app.css" rel="stylesheet">
 
-    <!-- Scripts -->
-    <script>
-        window.Laravel = <?php echo json_encode([
-            'csrfToken' => csrf_token(),
-        ]); ?>
-    </script>
-</head>
-<body>
-    <div id="app">
-        <nav class="navbar navbar-default navbar-static-top">
-            <div class="container">
+        <!-- Scripts -->
+        <script>
+            window.Laravel = <?php echo json_encode([
+                'csrfToken' => csrf_token(),
+            ]); ?>
+        </script>
+    </head>
+    <body>
+        <div id="app">
+            <nav class="navbar navbar-default navbar-static-top">
                 <div class="navbar-header">
 
                     <!-- Collapsed Hamburger -->
@@ -35,7 +34,7 @@
                     </button>
 
                     <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">
+                    <a class="navbar-brand" href="{{ url('/home') }}">
                         {{ config('app.name', 'Laravel') }}
                     </a>
                 </div>
@@ -60,9 +59,15 @@
 
                                 <ul class="dropdown-menu" role="menu">
                                     <li>
+                                        <a href="{{ url('/settings') }}">Settings</a>
+                                    </li>
+                                    <li class="divider">
+
+                                    </li>
+                                    <li>
                                         <a href="{{ url('/logout') }}"
-                                            onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+                                           onclick="event.preventDefault();
+                                           document.getElementById('logout-form').submit();">
                                             Logout
                                         </a>
 
@@ -75,8 +80,7 @@
                         @endif
                     </ul>
                 </div>
-            </div>
-        </nav>
+            </nav>
 
         @yield('content')
     </div>
