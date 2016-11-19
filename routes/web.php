@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use App\Jobs\DeployNewCode;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,9 +23,6 @@ Auth::routes();
 Route::get('/home', 'HomeController@index');
 
 Route::post('/deploy/cards', function(Request $request) {
-    chdir('..');
-    system('git pull');
-    system('composer install');
-    system('php artisan migrate');
+    dispatch(new DeployNewCode());
     return 'OK';
 });
