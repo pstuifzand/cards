@@ -26,4 +26,9 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function lists()
+    {
+        return $this->belongsToMany(CardList::class, 'user_list', 'user_id', 'card_list_id');
+    }
 }

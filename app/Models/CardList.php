@@ -14,4 +14,9 @@ class CardList extends Model
     {
         return $this->hasMany(Card::class, 'list_id');
     }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'user_list', 'card_list_id', 'user_id');
+    }
 }
