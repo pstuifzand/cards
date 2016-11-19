@@ -19,6 +19,10 @@
 .list {
     margin-bottom: 20px;
 }
+.card {
+    overflow: hidden;
+    white-space: normal;
+}
 </style>
 
 <script>
