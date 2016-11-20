@@ -2,6 +2,7 @@
     "app/Models/*.php": { "type": "model" },
     "app/Http/Controllers/*.php": { "type": "http" },
     "app/Providers/*.php": { "type": "provider" },
+    "config/*.php": { "type": "config" },
     "database/migrations/*.php": { "type": "migration" },
     "resources/views/*.blade.php": { "type": "blade" },
     "resources/assets/js/components/*.vue": { "type": "vue" },
