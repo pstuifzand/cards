@@ -168,6 +168,7 @@ return [
          */
 
         Laravel\Passport\PassportServiceProvider::class,
+        Clockwork\Support\Laravel\ClockworkServiceProvider::class,
 
         /*
          * Application Service Providers...
