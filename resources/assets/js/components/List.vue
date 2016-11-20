@@ -4,7 +4,7 @@
         <div class="list--cards connected">
             <template v-for="card in list.cards">
                 <div class="card" :data-id="card.id">
-                    <div class="card--name">{{ card.name }}</div>
+                    <div class="card--name">{{ card.position }} - {{ card.name }}</div>
                 </div>
             </template>
             <div class="list--add-card">
@@ -50,8 +50,10 @@
                 var name = this.newCardText;
                 this.list.cards.push({'name': name});
                 this.newCardText = '';
-                this.$http.post('/api/lists/' + this.list.id + '/cards', { 'name': name }).then(response => {
-                    console.log(response.data);
+                var url = '/api/lists/' + this.list.id + '/cards';
+                var that = this;
+                this.$http.post(url, { 'name': name }).then(response => {
+                    that.list = response.data;
                 });
             },
         }

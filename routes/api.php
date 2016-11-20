@@ -31,11 +31,22 @@ Route::post('/lists', function (Request $request) {
     return redirect('/api/lists');
 })->middleware('auth:api');
 
+Route::get('/lists/{id}', function(Request $request, $id) {
+    $list = CardList::findOrFail($id)->with(['cards' => function($query) {
+        $query->orderBy('position', 'asc');
+    }])->first();
+    return response()->json($list);
+});
+
 Route::post('/lists/{id}/cards', function (Request $request, $id) {
-    CardList::findOrFail($id)
-        ->cards()->create($request->only(['name']));
-    $lists = CardList::with('cards')->get();
-    return response()->json(['ok' => true]);
+    $list = CardList::findOrFail($id)->with(['cards' => function($query) {
+        $query->orderBy('position', 'asc');
+    }])->first();
+    $name = $request->input('name');
+    $position = $list->cards()->max('position') + 1;
+    $list_id = $id;
+    $list->cards()->create(compact('list_id', 'name', 'position'));
+    return redirect("/api/lists/$id");
 })->middleware('auth:api');
 
 Route::post('/lists/{id}/cards/{cardId}/move', function (Request $request, $id, $cardId) {
