@@ -1,6 +1,9 @@
 <template>
     <div>
-        <input type="text" v-model="new_list" @keyup.enter="addList">
+        <div class="form-group">
+            <label for="new_list" >Add a list...</label>
+            <input type="text" v-model="new_list" @keyup.enter="addList" class="form-control" id="new_list" />
+        </div>
 
         <div class="lists">
             <card-list v-for="list in lists" :list="list"></card-list>

@@ -25,7 +25,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $board = \Auth::user()->boards()->first();
-        return view('home', [ 'lists' => $board->lists ]);
+        return view('home');
     }
 }
