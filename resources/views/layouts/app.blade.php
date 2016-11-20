@@ -12,6 +12,7 @@
 
         <!-- Styles -->
         <link href="/css/app.css" rel="stylesheet">
+        @stack('head')
 
         <!-- Scripts -->
         <script>
@@ -90,5 +91,6 @@
         <!-- Scripts -->
         <script src="/js/app.js"></script>
         <script src="/js/all.js"></script>
+        @stack('footer_scripts')
     </body>
 </html>

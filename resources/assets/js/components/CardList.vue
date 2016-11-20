@@ -46,7 +46,7 @@
 
         methods: {
             addList() {
-                this.$http.post('/api/lists', { name: this.new_list }).then(response => {
+                this.$http.post(this.href, { 'name': this.new_list }).then(response => {
                     this.lists = response.data;
                     this.new_list = '';
                 });

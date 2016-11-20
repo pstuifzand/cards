@@ -28,36 +28,32 @@ Route::get('/lists', function (Request $request) {
 })->middleware('auth:api');
 
 Route::get('/board/{board}/lists', function(Request $request, Board $board) {
-    $lists = $board->lists()->withCards()->get();
+    $lists = $board->lists()->with(['cards' => function($query) {
+        $query->orderBy('position', 'asc');
+    }])->get();
     return response()->json($lists);
 })->middleware('auth:api')->name('api.board.lists');
 
-Route::post('/lists', function (Request $request) {
-    \Auth::user()->boards()->first()->lists()->create($request->only(['name']));
-    return redirect('/api/lists');
+Route::post('/board/{board}/lists', function (Request $request, Board $board) {
+    $board->lists()->create($request->only(['name']));
+    return redirect()->route('api.board.lists', $board);
 })->middleware('auth:api');
 
-Route::get('/lists/{id}', function(Request $request, $id) {
-    $list = CardList::findOrFail($id)->with(['cards' => function($query) {
+Route::get('/lists/{list}', function(Request $request, CardList $list) {
+    $list->load(['cards' => function($query) {
         $query->orderBy('position', 'asc');
-    }])->first();
+    }]);
     return response()->json($list);
-});
+})->middleware('auth:api')->name('api.lists.show');
 
-Route::post('/lists/{id}/cards', function (Request $request, $id) {
-    $list = CardList::findOrFail($id)->with(['cards' => function($query) {
-        $query->orderBy('position', 'asc');
-    }])->first();
+Route::post('/lists/{list}/cards', function (Request $request, CardList $list) {
     $name = $request->input('name');
     $position = $list->cards()->max('position') + 1;
-    $list_id = $id;
-    $list->cards()->create(compact('list_id', 'name', 'position'));
-    return redirect("/api/lists/$id");
+    $list->cards()->create(compact('name', 'position'));
+    return redirect()->route('api.lists.show', $list);
 })->middleware('auth:api');
 
-Route::post('/lists/{id}/cards/{cardId}/move', function (Request $request, $id, $cardId) {
-    $list = CardList::findOrFail($id);
-    $card = Card::findOrFail($cardId);
+Route::post('/lists/{list}/cards/{card}/move', function (Request $request, CardList $list, Card $card) {
     $newList = CardList::findOrFail($request->input('new_list_id'));
     $position = $request->input('position');
     $card->position = $position;

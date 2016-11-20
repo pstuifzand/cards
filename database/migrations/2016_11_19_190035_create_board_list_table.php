@@ -30,6 +30,6 @@ class CreateBoardListTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('board_list');
     }
 }

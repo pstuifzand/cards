@@ -24,9 +24,8 @@ class BoardController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
     }
 
     /**
@@ -37,7 +36,14 @@ class BoardController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required|max:255',
+        ]);
+
+        $board = new Board($request->only(['name']));
+        $board->user_id = \Auth::user()->id;
+        $board->save();
+        return redirect()->route('boards.show', $board);
     }
 
     /**
