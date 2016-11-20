@@ -20,13 +20,7 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:api');
 
-Route::get('/lists', function (Request $request) {
-    $lists = \Auth::user()->boards()->first()->lists()->with(['cards' => function($query) {
-        $query->orderBy('position', 'asc');
-    }])->get();
-    return response()->json($lists);
-})->middleware('auth:api');
-
+// Get all Lists of a Board
 Route::get('/board/{board}/lists', function(Request $request, Board $board) {
     $lists = $board->lists()->with(['cards' => function($query) {
         $query->orderBy('position', 'asc');
@@ -34,11 +28,13 @@ Route::get('/board/{board}/lists', function(Request $request, Board $board) {
     return response()->json($lists);
 })->middleware('auth:api')->name('api.board.lists');
 
+// Add List
 Route::post('/board/{board}/lists', function (Request $request, Board $board) {
     $board->lists()->create($request->only(['name']));
     return redirect()->route('api.board.lists', $board);
 })->middleware('auth:api');
 
+// Show Cards of a List
 Route::get('/lists/{list}', function(Request $request, CardList $list) {
     $list->load(['cards' => function($query) {
         $query->orderBy('position', 'asc');
@@ -46,6 +42,7 @@ Route::get('/lists/{list}', function(Request $request, CardList $list) {
     return response()->json($list);
 })->middleware('auth:api')->name('api.lists.show');
 
+// Add Cards
 Route::post('/lists/{list}/cards', function (Request $request, CardList $list) {
     $name = $request->input('name');
     $position = $list->cards()->max('position') + 1;
@@ -53,6 +50,7 @@ Route::post('/lists/{list}/cards', function (Request $request, CardList $list) {
     return redirect()->route('api.lists.show', $list);
 })->middleware('auth:api');
 
+// Move Cards between Lists
 Route::post('/lists/{list}/cards/{card}/move', function (Request $request, CardList $list, Card $card) {
     $newList = CardList::findOrFail($request->input('new_list_id'));
     $position = $request->input('position');
