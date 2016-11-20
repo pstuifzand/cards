@@ -16,6 +16,8 @@
 
 <script>
     export default {
+        props: ['href'],
+
         data() {
             return {
                 'lists': [],
@@ -50,7 +52,7 @@
             fetchLists() {
                 var that = this;
 
-                this.$http.get('/api/lists').then(response => {
+                this.$http.get(this.href).then(response => {
                     this.lists = response.data;
 
                     this.$nextTick(function() {

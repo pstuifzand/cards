@@ -40,7 +40,7 @@
             startAdding() {
                 this.adding = true;
                 this.$nextTick(function() {
-                    jQuery('#card-input').focus();
+                    //jQuery('#card-input').focus();
                 });
             },
             doneAdding() {

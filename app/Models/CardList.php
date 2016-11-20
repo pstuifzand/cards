@@ -19,4 +19,11 @@ class CardList extends Model
     {
         return $this->belongsToMany(User::class, 'user_list', 'card_list_id', 'user_id');
     }
+
+    public function scopeWithCards()
+    {
+        return $this->with([ 'cards' => function($query) {
+            $query->orderBy('position', 'asc'); 
+        }]);
+    }
 }

@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use App\Models\Card;
+use App\Models\Board;
 use App\Models\CardList;
 
 /*
@@ -25,6 +26,11 @@ Route::get('/lists', function (Request $request) {
     }])->get();
     return response()->json($lists);
 })->middleware('auth:api');
+
+Route::get('/board/{board}/lists', function(Request $request, Board $board) {
+    $lists = $board->lists()->withCards()->get();
+    return response()->json($lists);
+})->middleware('auth:api')->name('api.board.lists');
 
 Route::post('/lists', function (Request $request) {
     \Auth::user()->boards()->first()->lists()->create($request->only(['name']));

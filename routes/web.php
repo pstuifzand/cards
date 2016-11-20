@@ -25,6 +25,8 @@ Route::get('/settings', function(Request $request) {
     return view('settings');
 });
 
+Route::resource('boards', 'BoardController');
+
 Route::post('/deploy/cards', function(Request $request) {
     dispatch(new DeployNewCode());
     return 'OK';
