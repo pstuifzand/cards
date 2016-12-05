@@ -4,6 +4,12 @@
     <div class="container">
         <div class="row">
             <div class="col-xs-12">
+                <bs-breadcrumbs>
+                    @foreach ($crumbs as $crumb)
+                        <bs-breamcrumb href="{{ $crumb['url'] }}"></bs-breadcrubms>
+                    @endforeach
+                </bs-breadcrumbs>
+
                 <ol class="breadcrumb">
                     <li>
                         <a href="{{ url('/home') }}">
@@ -19,16 +25,10 @@
                         {{ $board->name }}
                     </li>
                 </ol>
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h1 class="panel-title">
-                            {{ $board->name }}
-                        </h1>
-                    </div>
-                    <div class="panel-body">
-                        <card-lists href="{{ route('api.board.lists', $board) }}"></card-lists>
-                    </div>
-                </div>
+
+                <bs-panel title="{{ $board->name }}">
+                    <card-lists href="{{ route('api.board.lists', $board) }}"></card-lists>
+                </bs-panel>
             </div>
         </div>
     </div>

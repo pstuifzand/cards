@@ -17,6 +17,7 @@ Vue.component('example', require('./components/Example.vue'));
 Vue.component('card-lists', require('./components/CardList.vue'));
 Vue.component('card-list', require('./components/List.vue'));
 Vue.component('card', require('./components/Card.vue'));
+Vue.component('bs-panel', require('./components/Panel.vue'));
 
 Vue.component(
     'passport-clients',
