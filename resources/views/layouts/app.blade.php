@@ -89,6 +89,10 @@
         </div>
 
         <!-- Scripts -->
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script>
+            axios.defaults.headers.common['X-CSRF-TOKEN'] = Laravel.csrfToken;
+        </script>
         <script src="/js/app.js"></script>
         <script src="/js/all.js"></script>
         @stack('footer_scripts')

@@ -46,7 +46,7 @@
 
         methods: {
             addList() {
-                this.$http.post(this.href, { 'name': this.new_list }).then(response => {
+                axios.post(this.href, { 'name': this.new_list }).then(response => {
                     this.lists = response.data;
                     this.new_list = '';
                 });
@@ -55,7 +55,7 @@
             fetchLists() {
                 var that = this;
 
-                this.$http.get(this.href).then(response => {
+                axios.get(this.href).then(response => {
                     this.lists = response.data;
 
                     this.$nextTick(function() {
@@ -77,7 +77,7 @@
                                 prevListId = listId;
                             }
                             var position = ui.item.prevAll('.card').length;
-                            that.$http.post(
+                            axios.post(
                                 '/api/lists/'+prevListId+'/cards/'+cardId+'/move',
                                 { 'position': position, 'new_list_id': listId }
                             );
