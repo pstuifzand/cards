@@ -5,24 +5,16 @@ use App\Models\Card;
 use App\Models\Board;
 use App\Models\CardList;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
-*/
-
 Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:api');
 
 // Get all Lists of a Board
+/**
+ * @param $request Illuminate\Http\Request;
+ */
 Route::get('/board/{board}/lists', function(Request $request, Board $board) {
-    $lists = $board->lists()->with(['cards' => function($query) {
+    $lists = $board->lists()->with(['cards' => function ($query) {
         $query->orderBy('position', 'asc');
     }])->get();
     return response()->json($lists);
@@ -42,7 +34,11 @@ Route::get('/lists/{list}', function(Request $request, CardList $list) {
     return response()->json($list);
 })->middleware('auth:api')->name('api.lists.show');
 
+
 // Add Cards
+/**
+ * @param Illuminate\Http\Request $request
+ */
 Route::post('/lists/{list}/cards', function (Request $request, CardList $list) {
     $name = $request->input('name');
     $position = $list->cards()->max('position') + 1;
@@ -63,3 +59,4 @@ Route::post('/lists/{list}/cards/{card}/move', function (Request $request, CardL
     $card->save();
     return response()->json(['ok' => true]);
 })->middleware('auth:api');
+

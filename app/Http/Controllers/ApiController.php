@@ -5,8 +5,10 @@ class ApiController extends Controller
 {
     public function lists()
     {
-        return response()->json([
+        return response()->json(
+            [
             'lists' => CardList::all(),
-        ]);
+            ]
+        );
     }
 }

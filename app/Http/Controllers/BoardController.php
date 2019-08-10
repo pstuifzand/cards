@@ -31,15 +31,22 @@ class BoardController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
+        $this->validate(
+            $request, [
             'name' => 'required|max:255',
-        ]);
+            ]
+        );
 
+
+
+        /**
+ * @var $board App\Board 
+*/
         $board = new Board($request->only(['name']));
         $board->user_id = \Auth::user()->id;
         $board->save();
@@ -49,7 +56,7 @@ class BoardController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  Board  $board
+     * @param  Board $board
      * @return \Illuminate\Http\Response
      */
     public function show(Board $board)
@@ -62,7 +69,7 @@ class BoardController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -73,8 +80,8 @@ class BoardController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int                      $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -85,7 +92,7 @@ class BoardController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

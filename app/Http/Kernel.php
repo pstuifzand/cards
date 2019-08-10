@@ -2,7 +2,12 @@
 
 namespace App\Http;
 
+use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
+use Illuminate\Routing\Middleware\SubstituteBindings;
+use Illuminate\Session\Middleware\StartSession;
+use Illuminate\View\Middleware\ShareErrorsFromSession;
+use Laravel\Passport\Http\Middleware\CreateFreshApiToken;
 
 class Kernel extends HttpKernel
 {
@@ -25,17 +30,17 @@ class Kernel extends HttpKernel
      */
     protected $middlewareGroups = [
         'web' => [
-            \App\Http\Middleware\EncryptCookies::class,
-            \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
-            \Illuminate\Session\Middleware\StartSession::class,
-            \Illuminate\View\Middleware\ShareErrorsFromSession::class,
-            \App\Http\Middleware\VerifyCsrfToken::class,
-            \Illuminate\Routing\Middleware\SubstituteBindings::class,
-            \Laravel\Passport\Http\Middleware\CreateFreshApiToken::class,
+            Middleware\EncryptCookies::class,
+            AddQueuedCookiesToResponse::class,
+            StartSession::class,
+            ShareErrorsFromSession::class,
+            Middleware\VerifyCsrfToken::class,
+            SubstituteBindings::class,
+            CreateFreshApiToken::class,
         ],
 
         'api' => [
-#            'throttle:60,1',
+            // 'throttle:60,1',
             'bindings',
         ],
     ];
@@ -50,7 +55,7 @@ class Kernel extends HttpKernel
     protected $routeMiddleware = [
         'auth' => \Illuminate\Auth\Middleware\Authenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
-        'bindings' => \Illuminate\Routing\Middleware\SubstituteBindings::class,
+        'bindings' => SubstituteBindings::class,
         'can' => \Illuminate\Auth\Middleware\Authorize::class,
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
