@@ -4,6 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * App\Models\Board
+ *
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\CardList[] $lists
+ * @property-read \App\Models\User $owner
+ * @mixin         \Eloquent
+ */
 class Board extends Model
 {
     protected $fillable = ['name', 'user_id'];

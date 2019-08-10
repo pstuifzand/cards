@@ -4,6 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * App\Models\CardList
+ *
+ * @property-read \Illuminate\Database\Eloquent\Collection|\app\Models\Card[] $cards
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\User[] $users
+ * @method        static \Illuminate\Database\Eloquent\Builder|\App\Models\CardList withCards()
+ * @mixin         \Eloquent
+ */
 class CardList extends Model
 {
     protected $table = 'lists';
@@ -22,8 +30,10 @@ class CardList extends Model
 
     public function scopeWithCards()
     {
-        return $this->with([ 'cards' => function($query) {
-            $query->orderBy('position', 'asc'); 
-        }]);
+        return $this->with(
+            [ 'cards' => function ($query) {
+                $query->orderBy('position', 'asc'); 
+            }]
+        );
     }
 }
